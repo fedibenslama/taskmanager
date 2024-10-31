@@ -41,6 +41,7 @@ public class TaskController {
                     task.setTitle(updatedTask.getTitle());
                     task.setDescription(updatedTask.getDescription());
                     task.setCompleted(updatedTask.isCompleted());
+                    task.setStatus(updatedTask.getStatus());
                     Task savedTask = taskRepository.save(task);
                     return ResponseEntity.ok(savedTask);
                 })

@@ -13,6 +13,7 @@ public class Task {
     private String title;
     private String description;
     private boolean completed;
+    private String status;
 
     //Getters and Setters
     public Long getId() {
@@ -38,5 +39,11 @@ public class Task {
     }
     public void setCompleted(boolean completed) {
         this.completed = completed;
+    }
+    public String getStatus(){
+        return status;
+    }
+    public void setStatus(String status){
+        this.status = status;
     }
 }
