@@ -58,4 +58,9 @@ public class TaskController {
                 })
                 .orElseGet(() -> ResponseEntity.notFound().build()); // This part is also fine
     }
+    //Filter By Status
+    @GetMapping("/status/{status}")
+    public List<Task> getTasksByStatus(@PathVariable String status){    //Using Task: If we returned just a single Task, it would only be suitable for scenarios where you expect a single result (like getting a task by its ID). However, since a status can correspond to multiple tasks, a List<Task> is more appropriate.
+        return taskRepository.findByStatus(status); //@PathVariable binds the {status} part of the URL to the status parameter in the method.
+    }
 }
