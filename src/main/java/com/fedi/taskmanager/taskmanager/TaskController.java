@@ -25,7 +25,7 @@ public class TaskController {
     }
     //Get a Task by Id
     @GetMapping("/{id}")            //This maps a GET request for a specific task by ID.
-    public ResponseEntity<Task> getTaskById(@PathVariable Long id){
+    public ResponseEntity<Task> getTaskById(@PathVariable String id){
         Task task = taskRepository.findById(id).orElse(null);
         if(task != null){
             return ResponseEntity.ok(task);
@@ -35,7 +35,7 @@ public class TaskController {
     }
     //Update Task
     @PutMapping("/{id}")
-    public ResponseEntity<Task> updateTask(@PathVariable Long id, @RequestBody Task updatedTask){
+    public ResponseEntity<Task> updateTask(@PathVariable String id, @RequestBody Task updatedTask){
         return taskRepository.findById(id)
                 .map(task -> {
                     task.setTitle(updatedTask.getTitle());
@@ -50,7 +50,7 @@ public class TaskController {
 
     //Delete a Task
     @DeleteMapping("/{id}")
-    public ResponseEntity<Object> deleteTask(@PathVariable Long id) {
+    public ResponseEntity<Object> deleteTask(@PathVariable String id) {
         return taskRepository.findById(id)
                 .map(task -> {
                     taskRepository.delete(task);
