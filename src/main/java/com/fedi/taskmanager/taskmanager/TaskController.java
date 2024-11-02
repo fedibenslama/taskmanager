@@ -3,6 +3,9 @@ package com.fedi.taskmanager.taskmanager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
 
 import java.util.List;
 
@@ -63,4 +66,12 @@ public class TaskController {
     public List<Task> getTasksByStatus(@PathVariable String status){    //Using Task: If we returned just a single Task, it would only be suitable for scenarios where you expect a single result (like getting a task by its ID). However, since a status can correspond to multiple tasks, a List<Task> is more appropriate.
         return taskRepository.findByStatus(status); //@PathVariable binds the {status} part of the URL to the status parameter in the method.
     }
+    ////Get All Tasks by Pagination
+    @GetMapping("/paginated")
+    public Page<Task> getAllTasks(@RequestParam(defaultValue = "0") int page,
+                                  @RequestParam(defaultValue = "10") int size) {
+        Pageable pageable = PageRequest.of(page, size); //part of Spring Data's support for pagination
+        return taskRepository.findAll(pageable);
+    }
+
 }
